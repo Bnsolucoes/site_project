@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definições das variáveis de cor HSL para Shadcn/UI - Fundo branco com acentos azul escuro e laranja */
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Fundo branco */
+    --foreground: 222.2 84% 4.9%; /* Texto escuro */
+    --card: 0 0% 100%; /* Cards brancos */
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 220 91% 25%; /* Azul escuro para botões principais */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 210 40% 98%; /* Cinza muito claro */
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 98%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 25 95% 53%; /* Laranja para destaques */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%; /* Bordas sutis */
+    --input: 214.3 31.8% 91.4%;
+    --ring: 220 91% 25%;
+    --radius: 0.5rem;
+    
+    /* Cores customizadas BN Soluções */
+    --bn-blue-dark: 220 91% 25%;
+    --bn-orange: 25 95% 53%;
+    --bn-blue-light: 220 91% 45%;
+    --bn-gray-light: 210 40% 98%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 220 91% 35%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 220 91% 35%;
+  }
+}
+
+/* Garantir que o body tenha fundo branco */
+body {
+  background-color: white;
+  color: hsl(var(--foreground));
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Estilos customizados do BN Soluções */
+.hero-gradient {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #f97316 100%);
+}
+
+.bn-gradient {
+  background: linear-gradient(135deg, hsl(var(--bn-blue-dark)) 0%, hsl(var(--bn-blue-light)) 50%, hsl(var(--bn-orange)) 100%);
+}
+
+.glass-effect {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.floating-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.pulse-green {
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(34, 197, 94, 0); }
+}
+
+.pulse-orange {
+  animation: pulse-orange 2s infinite;
+}
+
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: pulse-green 2s infinite;
+}
+
+.chatbot-container {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 999;
+  width: 350px;
+  max-height: 500px;
+}
+
+/* Botões interativos com fundo branco por padrão */
+.filter-button {
+  @apply px-4 py-2 rounded-full border border-gray-300 bg-white text-gray-700 transition-all duration-300 cursor-pointer hover:bg-primary hover:text-primary-foreground hover:border-primary;
+}
+
+.filter-button.active {
+  @apply bg-primary text-primary-foreground border-primary;
+}
+
+/* Cores específicas para BN Soluções */
+.bg-bn-blue {
+  background-color: hsl(var(--bn-blue-dark));
+}
+
+.bg-bn-orange {
+  background-color: hsl(var(--bn-orange));
+}
+
+.text-bn-blue {
+  color: hsl(var(--bn-blue-dark));
+}
+
+.text-bn-orange {
+  color: hsl(var(--bn-orange));
+}
+
+.border-bn-blue {
+  border-color: hsl(var(--bn-blue-dark));
+}
+
+.border-bn-orange {
+  border-color: hsl(var(--bn-orange));
+}
+
+/* Seções com fundo branco */
+.section-white {
+  background-color: white;
+}
+
+.section-light {
+  background-color: hsl(var(--bn-gray-light));
+}
+
+/* Cards com fundo branco e bordas sutis */
+.card-white {
+  background-color: white;
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+/* Responsividade e acessibilidade */
+@media (max-width: 768px) {
+  .hero-gradient {
+    background: linear-gradient(180deg, #1e3a8a 0%, #3b82f6 50%, #f97316 100%);
+  }
+}
+
+/* Melhorias de performance */
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Animações suaves */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
