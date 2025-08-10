@@ -12,7 +12,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": https://bnsoluct.onrender.com
+      "destination": "https://bnsoluct.onrender.com/api/$1"
     }
   ]
 }
