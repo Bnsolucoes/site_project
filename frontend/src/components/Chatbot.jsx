@@ -18,6 +18,8 @@ const Chatbot = ({ isOpen, onToggle }) => {
   const messagesEndRef = useRef(null)
   const sessionId = useRef(Math.random().toString(36).substr(2, 9))
 
+  const API_URL = import.meta.env.VITE_API_URL || '/api'
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }
@@ -41,22 +43,24 @@ const Chatbot = ({ isOpen, onToggle }) => {
     setIsLoading(true)
 
     try {
-      const response = await fetch('http://localhost:3001/chat', {
+      const response = await fetch(`${API_URL}/chat`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          prompt: inputMessage,
+          message: inputMessage, // padronizado para 'message'
           session_id: sessionId.current
         })
       })
+
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`)
+      }
 
       const data = await response.json()
 
       const botMessage = {
         id: Date.now() + 1,
-        text: data.answer,
+        text: data.answer || 'Desculpe, não consegui entender.',
         sender: 'bot',
         timestamp: new Date(),
         escalateToWhatsApp: data.escalate_to_whatsapp,
@@ -65,14 +69,13 @@ const Chatbot = ({ isOpen, onToggle }) => {
 
       setMessages(prev => [...prev, botMessage])
 
-      // Google Analytics tracking
+      // Google Analytics
       if (window.gtag) {
         window.gtag('event', 'chatbot_interaction', {
           event_category: 'engagement',
           event_label: inputMessage
         })
       }
-
     } catch (error) {
       console.error('Erro no chatbot:', error)
       const errorMessage = {
@@ -96,8 +99,6 @@ const Chatbot = ({ isOpen, onToggle }) => {
 
   const handleWhatsAppEscalation = (url) => {
     window.open(url, '_blank')
-    
-    // Google Analytics tracking
     if (window.gtag) {
       window.gtag('event', 'whatsapp_escalation', {
         event_category: 'conversion',
@@ -137,7 +138,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
         </CardHeader>
 
         <CardContent className="p-0">
-          {/* Messages Area */}
+          {/* Área de Mensagens */}
           <div className="h-80 overflow-y-auto p-4 space-y-4">
             {messages.map((message) => (
               <div
@@ -171,7 +172,7 @@ const Chatbot = ({ isOpen, onToggle }) => {
                 </div>
               </div>
             ))}
-            
+
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-gray-100 text-gray-800 px-4 py-2 rounded-lg">
@@ -179,18 +180,24 @@ const Chatbot = ({ isOpen, onToggle }) => {
                     <Bot size={16} />
                     <div className="flex space-x-1">
                       <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                      <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                      <div
+                        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: '0.1s' }}
+                      ></div>
+                      <div
+                        className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                        style={{ animationDelay: '0.2s' }}
+                      ></div>
                     </div>
                   </div>
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Area */}
+          {/* Área de Input */}
           <div className="border-t p-4">
             <div className="flex space-x-2">
               <Input
@@ -217,4 +224,3 @@ const Chatbot = ({ isOpen, onToggle }) => {
 }
 
 export default Chatbot
-
