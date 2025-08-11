@@ -176,7 +176,9 @@ const Home = () => {
                       </div>
                       <div>
                         <p className="text-sm text-green-600">Aumento de Faturamento</p>
-                        <p className="text-2xl font-bold text-green-800">R$ {roiResult.aumento_faturamento_estimado?.toLocaleString('pt-BR')}</p>
+                        <p className="text-2xl font-bold text-green-800">
+                          R$ {roiResult.aumento_faturamento_estimado?.toLocaleString('pt-BR')}
+                        </p>
                       </div>
                     </div>
                     <div className="mt-4">
