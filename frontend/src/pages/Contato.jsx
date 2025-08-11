@@ -93,7 +93,7 @@ const Contato = () => {
     {
       icon: <Phone className="h-6 w-6 text-primary" />,
       titulo: "Telefone",
-      info: "(11) 94066-3895",
+      info: "(11) 93271-3209",
       link: "tel:+5511940663895",
       descricao: "Seg a Sex, 9h às 18h"
     },
