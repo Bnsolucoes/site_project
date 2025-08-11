@@ -13,6 +13,10 @@
     {
       "source": "/api/(.*)",
       "destination": "https://bnsoluct.onrender.com/api/$1"
+    },
+    {
+      "source": "/chat",
+      "destination": "https://bnsoluct.onrender.com/chat"
     }
   ]
 }
